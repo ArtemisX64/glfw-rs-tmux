@@ -26,8 +26,6 @@ GLFW bindings and wrapper for The Rust Programming Language.
 ## Example
 
 ~~~rust
-extern crate glfw;
-
 use glfw::{Action, Context, Key};
 
 fn main() {
