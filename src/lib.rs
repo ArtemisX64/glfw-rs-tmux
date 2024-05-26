@@ -3363,7 +3363,7 @@ impl Window {
     }
 
     /// Wrapper for `glfwGetGLXContext`
-    #[cfg(target_os = "linux", target_os = "android")]
+    #[cfg(all(target_os = "linux", target_os = "android"))]
     pub fn get_glx_context(&self) -> *mut c_void {
         unsafe { ffi::glfwGetGLXContext(self.ptr) }
     }

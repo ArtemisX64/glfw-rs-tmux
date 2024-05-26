@@ -692,6 +692,6 @@ extern "C" {
 
     #[cfg(all(any(target_os = "linux", target_os = "android", target_os = "freebsd"), feature = "wayland"))]
     pub fn glfwGetWaylandWindow(window: *mut GLFWwindow) -> *mut c_void;
-    #[cfg(all(any(target_os = "linux", target_os = "android" target_os = "freebsd"), feature = "wayland"))]
+    #[cfg(all(any(target_os = "linux", target_os = "android", target_os = "freebsd"), feature = "wayland"))]
     pub fn glfwGetWaylandDisplay() -> *mut c_void;
 }
