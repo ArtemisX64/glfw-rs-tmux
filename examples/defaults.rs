@@ -85,7 +85,7 @@ mod gl {
     #[link(name = "OpenGL", kind = "framework")]
     extern "C" {}
 
-    #[cfg(target_os = "linux")]
+    #[cfg(target_os = "linux", target_os = "android")]
     #[link(name = "GL")]
     extern "C" {}
 

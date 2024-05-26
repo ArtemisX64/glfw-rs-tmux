@@ -1479,7 +1479,7 @@ impl Glfw {
     }
 
     /// Wrapper for `glfwGetX11Display`
-    #[cfg(all(target_os = "linux", not(feature = "wayland")))]
+    #[cfg(all(target_os = "linux", target_os = "android", not(feature = "wayland")))]
     pub fn get_x11_display(&self) -> *mut c_void {
         unsafe { ffi::glfwGetX11Display() }
     }
@@ -3351,7 +3351,7 @@ impl Window {
     }
 
     /// Wrapper for `glfwGetX11Window`
-    #[cfg(all(target_os = "linux", not(feature = "wayland")))]
+    #[cfg(all(target_os = "linux",target_os = "android",  not(feature = "wayland")))]
     pub fn get_x11_window(&self) -> *mut c_void {
         unsafe { ffi::glfwGetX11Window(self.ptr) }
     }
@@ -3363,7 +3363,7 @@ impl Window {
     }
 
     /// Wrapper for `glfwGetGLXContext`
-    #[cfg(target_os = "linux")]
+    #[cfg(target_os = "linux", target_os = "android")]
     pub fn get_glx_context(&self) -> *mut c_void {
         unsafe { ffi::glfwGetGLXContext(self.ptr) }
     }
@@ -3627,7 +3627,7 @@ fn raw_window_handle<C: Context>(context: &C) -> RawWindowHandle {
         handle.hinstance = NonZeroIsize::new(hinstance as isize);
         RawWindowHandle::Win32(handle)
     }
-    #[cfg(all(any(target_os = "linux", target_os = "freebsd", target_os = "dragonfly"), not(feature = "wayland")))]
+    #[cfg(all(any(target_os = "linux", target_os = "freebsd", target_os = "dragonfly", target_os = "android"), not(feature = "wayland")))]
     {
         use raw_window_handle::XlibWindowHandle;
         let window = unsafe { ffi::glfwGetX11Window(context.window_ptr()) as std::os::raw::c_ulong };
@@ -3673,7 +3673,7 @@ fn raw_display_handle() -> RawDisplayHandle {
         use raw_window_handle::WindowsDisplayHandle;
         RawDisplayHandle::Windows(WindowsDisplayHandle::new())
     }
-    #[cfg(all(any(target_os = "linux", target_os = "freebsd", target_os = "dragonfly"), not(feature = "wayland")))]
+    #[cfg(all(any(target_os = "linux", target_os = "freebsd", target_os = "dragonfly", target_os = "android"), not(feature = "wayland")))]
     {
         use raw_window_handle::XlibDisplayHandle;
         use std::ptr::NonNull;
@@ -3715,7 +3715,7 @@ fn raw_window_handle<C: Context>(context: &C) -> RawWindowHandle {
         handle.hinstance = hinstance;
         RawWindowHandle::Win32(handle)
     }
-    #[cfg(all(any(target_os = "linux", target_os = "freebsd", target_os = "dragonfly"), not(feature = "wayland")))]
+    #[cfg(all(any(target_os = "linux", target_os = "freebsd", target_os = "dragonfly", target_os = "android"), not(feature = "wayland")))]
     {
         use raw_window_handle::XlibWindowHandle;
         let mut handle = XlibWindowHandle::empty();
@@ -3765,7 +3765,7 @@ fn raw_display_handle() -> RawDisplayHandle {
         use raw_window_handle::WindowsDisplayHandle;
         RawDisplayHandle::Windows(WindowsDisplayHandle::empty())
     }
-    #[cfg(all(any(target_os = "linux", target_os = "freebsd", target_os = "dragonfly"), not(feature = "wayland")))]
+    #[cfg(all(any(target_os = "linux", target_os = "freebsd", target_os = "dragonfly", target_os = "android"), not(feature = "wayland")))]
     {
         use raw_window_handle::XlibDisplayHandle;
         let mut handle = XlibDisplayHandle::empty();

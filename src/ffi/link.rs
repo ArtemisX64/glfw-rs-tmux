@@ -43,7 +43,7 @@ extern "C" {}
 extern "C" {}
 
 #[cfg(all(
-    any(target_os = "linux", target_os = "freebsd", target_os = "dragonfly"),
+    any(target_os = "linux", target_os = "freebsd", target_os = "dragonfly", target_os = "android"),
     not(feature = "wayland")
 ))]
 #[link(name = "X11")]
